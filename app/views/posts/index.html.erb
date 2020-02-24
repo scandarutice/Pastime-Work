@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pastime Work</title>
+<!--CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<!--JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script><!--自作CSS -->
+<style type="text/css"><!--
+/*ここに調整CSS記述*/
+.jumbotron { background-image:url(https://publicdomainq.net/images/201706/25s/publicdomainq-0010472cwk.jpg); background-size: cover; color: yellow;}
+.wrapper { background-color: aliceblue;}
+.message__upper-info { display: flex}
+.modal-body { position: relative;}
+.img-btn { position: absolute; right: 5px; bottom: -10px;}
+--></style>
+</head>
+ 
+<body>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-6">Pastime Workで自分らしく！</h1>
+    <p class="lead">趣味を仕事に。遊んで稼ぐ時代をみんなで。</p>
+  </div>
+</div>
+<div class="wrapper">
+  <div class="container">
+    <ul class="nav nav-pills nav-fill p-0">
+      <li class="nav-item">
+        <a class="nav-link" href="edit_user_path(current_user)">ユーザー情報の編集</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="new_group_path">グループの作成・編集</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">フォローしているユーザー</a>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-example">Let's 発信</button>
+      </li>
+      <li class="nav-item">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="chat-side col-3 mt-5">
+        <div class="user-profile">
+          <p class="user-name">ログイン中のユーザー</p>
+          <pre>
+    ここに
+    プロフィールを
+    書き込んで
+    表示する
+          </pre>
+        </div>
+
+        <div class="groups">
+          <a href="#">
+            <div class="group">
+            <p class="group__group-name">テストグループ</p>
+            <p class="group__latest-message">まだメッセージがありません</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="chat-main col-9 mt-5">
+        <div class="main-header">
+          <div class="group-info row">
+            <h5 class="current-group">
+              aaa
+            </h5>
+            <ul class="member-list ml-5">
+              参加メンバー：
+              <li class="member-list__member">poppi</li>
+            </ul>
+          </div>
+        </div>
+        <div class="messages">
+          <div class="message">
+            <div class="message__upper-info">
+              <p class="message__upper-info__talker">テストユーザー</p>
+              <p class="message__upper-info__date ml-3">投稿日時</p>
+            </div>
+            <p class="message__text">テスト</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.モーダルの配置 -->
+  <div class="modal" id="modal-example" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+
+          <!-- 3.モーダルのコンテンツ -->
+          <div class="modal-content">
+
+              <!-- 4.モーダルのヘッダ -->
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h6 class="modal-title" id="modal-label">やっぱり止める</h6>
+              </div>
+
+              <!-- 5.モーダルのボディ -->
+              <div class="modal-body">
+                  <p>何を発信しますか？<br>
+                    <textarea class="form-control" rows="3"></textarea>
+                  </p>
+                  <a href="#"><p class="img-btn">画像・動画を選択<i class="fas fa-camera fa-fw"></i></p></a>
+              </div>
+
+              <!-- 6.モーダルのフッタ -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                <button type="button" class="btn btn-primary">発信！</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</body>
+</html>
