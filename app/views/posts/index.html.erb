@@ -1,42 +1,21 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pastime Work</title>
-<!--CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-<!--JS -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script><!--自作CSS -->
-<style type="text/css"><!--
-/*ここに調整CSS記述*/
-.jumbotron { background-image:url(https://publicdomainq.net/images/201706/25s/publicdomainq-0010472cwk.jpg); background-size: cover; color: yellow;}
-.wrapper { background-color: aliceblue;}
-.message__upper-info { display: flex}
-.modal-body { position: relative;}
-.img-btn { position: absolute; right: 5px; bottom: -10px;}
---></style>
-</head>
  
 <body>
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-6">Pastime Workで自分らしく！</h1>
-    <p class="lead">趣味を仕事に。遊んで稼ぐ時代をみんなで。</p>
-  </div>
-</div>
+  <header>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-6">Pastime Workで自分らしく！</h1>
+        <p class="lead">趣味を仕事に。遊んで稼ぐ時代をみんなで。</p>
+      </div>
+    </div>
+  </header>
 <div class="wrapper">
   <div class="container">
     <ul class="nav nav-pills nav-fill p-0">
       <li class="nav-item">
-        <a class="nav-link" href="edit_user_path(current_user)">ユーザー情報の編集</a>
+        <a class="nav-link" href="/users/edit">ユーザー情報の編集</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="new_group_path">グループの作成・編集</a>
+        <a class="nav-link" href="/groups/new">グループの作成・編集</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">フォローしているユーザー</a>
@@ -52,18 +31,20 @@
       </li>
     </ul>
   </div>
-  <div class="container">
+  <div class="main-content container">
     <div class="row">
       <div class="chat-side col-3 mt-5">
         <div class="user-profile">
-          <p class="user-name">ログイン中のユーザー</p>
+          <%=current_user.name %><br><br>
+          <img src="https://decoruto.com/user_data/00000965.png" class="img-circle ml-5" alt="参考画像" width="70" height="70">
+
           <pre>
     ここに
     プロフィールを
     書き込んで
     表示する
           </pre>
-        </div>
+        </div><br><br>
 
         <div class="groups">
           <a href="#">
@@ -78,7 +59,7 @@
       <div class="chat-main col-9 mt-5">
         <div class="main-header">
           <div class="group-info row">
-            <h5 class="current-group">
+            <h5 class="current-group ml-5">
               aaa
             </h5>
             <ul class="member-list ml-5">
@@ -88,6 +69,20 @@
           </div>
         </div>
         <div class="messages">
+          <div class="message">
+            <div class="message__upper-info">
+              <%= @post.user_id %>
+              <%= @post.created_at%>
+            </div>
+            <p class="message__text">テスト</p>
+          </div>
+          <div class="message">
+            <div class="message__upper-info">
+              <p class="message__upper-info__talker">テストユーザー</p>
+              <p class="message__upper-info__date ml-3">投稿日時</p>
+            </div>
+            <p class="message__text">テスト</p>
+          </div>
           <div class="message">
             <div class="message__upper-info">
               <p class="message__upper-info__talker">テストユーザー</p>
@@ -109,25 +104,27 @@
 
               <!-- 4.モーダルのヘッダ -->
               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-                  <h6 class="modal-title" id="modal-label">やっぱり止める</h6>
+                <h4>あなたの魅力を発信しましょう！</h4>
               </div>
 
               <!-- 5.モーダルのボディ -->
+            <%= form_for [@post] do |form| %>
               <div class="modal-body">
+                
                   <p>何を発信しますか？<br>
-                    <textarea class="form-control" rows="3"></textarea>
+                    <%= form.text_area :content, class: "form-control rows=3"%>
                   </p>
-                  <a href="#"><p class="img-btn">画像・動画を選択<i class="fas fa-camera fa-fw"></i></p></a>
+                  <label class="input-box__image" for="message_image">
+                    <p class="img-btn">画像・動画を選択<i class="fa fa-camera fa-fw"></i>
+                    <input class="input-box__image__file" type="file" name="message[image]" id="message_image"></p>
+                  </label>
               </div>
-
               <!-- 6.モーダルのフッタ -->
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-                <button type="button" class="btn btn-primary">発信！</button>
+                <%= form.submit '発信!', class:"btn btn-primary" %>
               </div>
+            <% end %>
           </div>
       </div>
   </div>
